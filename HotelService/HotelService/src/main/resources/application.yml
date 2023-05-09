@@ -1,6 +1,18 @@
 server:
   port: 8082
 
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+      
 
 spring:
   datasource:
@@ -8,6 +20,7 @@ spring:
     username: root
     password: Stick@123
     driver-class-name: com.mysql.cj.jdbc.Driver
+    
   jpa:
     hibernate:
       ddl-auto: update

@@ -26,7 +26,7 @@ public class RatingController {
     }
 
     //get all
-    @GetMapping
+    @GetMapping("/getRatings")
     public ResponseEntity<List<Rating>> getRatings() {
         return ResponseEntity.ok(ratingService.getRatings());
     }

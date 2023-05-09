@@ -69,7 +69,7 @@ public class UserController {
 
 
     //all user get
-    @GetMapping
+    @GetMapping("getAllUsers")
     public ResponseEntity<List<User>> getAllUser() {
         List<User> allUser = userService.getAllUser();
         return ResponseEntity.ok(allUser);

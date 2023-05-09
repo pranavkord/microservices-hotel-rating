@@ -23,8 +23,8 @@ spring:
           uri: lb://RATING-SERVICE
           predicates:
             - Path=/ratings/**
-
-
+            
+    
 
 
 eureka:
@@ -46,3 +46,20 @@ okta:
     client-id: 0oa9e412gkiIG0Bqr5d7
     client-secret: yxZz-fA7ZQ7avEeZGP1vKf4fbSAd32IvfQIuiLbB
     scopes: openid, profile, email, offline_access
+    
+
+
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+
+
