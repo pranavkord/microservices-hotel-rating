@@ -5,6 +5,7 @@ import com.psldemo.user.service.entities.Rating;
 import com.psldemo.user.service.entities.User;
 import com.psldemo.user.service.exceptions.ResourceNotFoundException;
 import com.psldemo.user.service.external.services.HotelService;
+import com.psldemo.user.service.external.services.RatingService;
 import com.psldemo.user.service.repositories.UserRepository;
 import com.psldemo.user.service.services.UserService;
 
@@ -32,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private HotelService hotelService;
+    
+    @Autowired
+    private RatingService ratingService;
 
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
