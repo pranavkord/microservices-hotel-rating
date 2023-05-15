@@ -74,4 +74,10 @@ public class ReservationController {
         map.put("success", true);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
+    
+	@GetMapping("/user/{id}")
+	public ResponseEntity<Object> getAllReservationsByUserId(@PathVariable String id){
+		List<Reservation> user = reservationService.getReservationsByUserId(id);
+		return new ResponseEntity<Object>(user, HttpStatus.OK);
+	}
 }

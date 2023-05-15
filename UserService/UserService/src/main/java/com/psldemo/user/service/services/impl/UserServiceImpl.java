@@ -2,6 +2,7 @@ package com.psldemo.user.service.services.impl;
 
 import com.psldemo.user.service.entities.Hotel;
 import com.psldemo.user.service.entities.Rating;
+import com.psldemo.user.service.entities.Reservation;
 import com.psldemo.user.service.entities.User;
 import com.psldemo.user.service.exceptions.ResourceNotFoundException;
 import com.psldemo.user.service.external.services.HotelService;
@@ -33,6 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private HotelService hotelService;
+    
+
     
     @Autowired
     private RatingService ratingService;
@@ -80,4 +83,12 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+	@Override
+	public List<Reservation> getReservationsByUserId(String id) {
+		
+		List<Reservation> list = hotelService.getReservationsByUserId(id);
+		// TODO Auto-generated method stub
+		return list;
+	}
 }

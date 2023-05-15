@@ -1,7 +1,5 @@
 package com.psldemo.hotel.services;
 
-//ion;
-
 
 import lombok.AllArgsConstructor;
 
@@ -33,8 +31,8 @@ public class ReservationService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format(RESERVATION_NOT_FOUND_MSG, id)));
     }
     
-    public List<Reservation> getAllReservationsByUserId(Long id) throws ResourceNotFoundException {
-        return reservationRepository.getAllReservationsByUserId(id);
+    public List<Reservation> getAllReservationsByUserId(String id) throws ResourceNotFoundException {
+        return reservationRepository.getReservationsByUserId(id);
     }
 
     public List<Reservation> findAllById(Long id) {
@@ -65,4 +63,12 @@ public class ReservationService {
 
         reservationRepository.deleteById(id);
     }
+    
+
+	public List<Reservation> getReservationsByUserId(String id) {
+		
+		List<Reservation> list = reservationRepository.getReservationsByUserId(id);
+		// TODO Auto-generated method stub
+		return list;
+	}
 }
