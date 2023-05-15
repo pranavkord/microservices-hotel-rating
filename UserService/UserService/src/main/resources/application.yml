@@ -22,13 +22,13 @@ spring:
   config:
     import: optional:configserver:http://localhost:8085
     
-  #profile: dev
+  //profile: dev
 
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri:  https://dev-88604293.okta.com/oauth2/default
+          issuer-uri: https://dev-88604293.okta.com/oauth2/default
       client:
         registration:
           my-internal-client:
@@ -40,7 +40,7 @@ spring:
 
         provider:
           okta:
-            issuer-uri:  https://dev-77584981.okta.com/oauth2/default
+            issuer-uri: https://dev-88604293.okta.com/oauth2/default
 
 
 
@@ -65,20 +65,7 @@ management:
         include: "*"
       base-path: /actuator
       
-#  trace:
-#    http:
-#      enabled: true
-#      include:
-#      - request-headers
-#      - response-headers
-#      - cookie-headers
-#      - principal
-#      - time-taken
-#      - authorization-header
-#      - remote-address
-#      - session-id
-    
-          
+      
 
   endpoint:
     metrics:
@@ -118,7 +105,7 @@ resilience4j:
 
 okta:
   oauth2:
-    issuer: https://dev-77584981.okta.com/oauth2/default
+    issuer: https://dev-88604293.okta.com/oauth2/default
     audience: api://default
 
 
