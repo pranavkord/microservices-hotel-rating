@@ -15,60 +15,22 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Service
-public class ReservationService {
 
-    @Autowired	
-    private ReservationRepository reservationRepository;
-    private static final String RESERVATION_NOT_FOUND_MSG = "reservation with id %d not found";
+public interface ReservationService {
 
-    public List<Reservation> fetchAllReservations() {
-        return reservationRepository.findAll();
-    }
-
-    public Reservation findById(Long id) throws ResourceNotFoundException {
-        return reservationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format(RESERVATION_NOT_FOUND_MSG, id)));
-    }
-    
-    public List<Reservation> getAllReservationsByUserId(String id) throws ResourceNotFoundException {
-        return reservationRepository.getReservationsByUserId(id);
-    }
-
-    public List<Reservation> findAllById(Long id) {
-        return reservationRepository.findAllById(id);
-    }
-
-    public void createReservation(Reservation reservation) throws BadRequestException {
-        try {
-            reservationRepository.save(reservation);
-        } catch (Exception e) {
-            throw new BadRequestException("invalid request");
-        }
-    }
-
-    public void updateReservation(Reservation reservation) throws BadRequestException {
-        try {
-            reservationRepository.save(reservation);
-        } catch (Exception e) {
-            throw new BadRequestException("invalid request");
-        }
-    }
-
-    public void deleteReservation(Long id) throws ResourceNotFoundException {
-        boolean reservationExist = reservationRepository.findById(id).isPresent();
-
-        if (!reservationExist)
-            throw new ResourceNotFoundException("reservation does not exist");
-
-        reservationRepository.deleteById(id);
-    }
-    
-
-	public List<Reservation> getReservationsByUserId(String id) {
-		
-		List<Reservation> list = reservationRepository.getReservationsByUserId(id);
-		// TODO Auto-generated method stub
-		return list;
-	}
+	public List<Reservation> fetchAllReservations();
+	
+	public Reservation findById(Long id);
+	
+	List<Reservation> getAllReservationsByUserId(String id);
+	
+	public List<Reservation> findAllById(Long id);
+	
+	public void createReservation(Reservation reservation);
+	
+	public void updateReservation(Reservation reservation);
+	
+	public void deleteReservation(Long id);
+	
+	public List<Reservation> getReservationsByUserId(String id);
 }
