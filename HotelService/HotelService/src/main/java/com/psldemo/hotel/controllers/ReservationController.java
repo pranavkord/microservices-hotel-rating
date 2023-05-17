@@ -80,7 +80,10 @@ public class ReservationController {
 	}
 	
 	@PostMapping("/{id}/payment")
-	public void payForReservation(@PathVariable Long id, @RequestBody ChargeRequest chargeRequest) throws StripeException {
+	public ResponseEntity<Object> payForReservation(@PathVariable Long id, @RequestBody ChargeRequest chargeRequest) throws StripeException {
 	  reservationService.payForReservation(id, chargeRequest);
+	  Map<String, Boolean> map = new HashMap<>();
+      map.put("success", true);
+      return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 }

@@ -77,8 +77,12 @@ public class ReservationService {
 	  Reservation reservation = reservationRepository.findById(id).orElseThrow(
 	      () -> new ResourceNotFoundException("reservation does not exist"));
 	  
+	  // Generate single use stripe token for credit card to be sent with payment request
+	  String token = stripeService.getToken(chargeRequest.getCardNumber(), 
+	      chargeRequest.getExpMonth(), chargeRequest.getExpYear(), chargeRequest.getCvc());
+	  
 	  // Make payment
-	  Charge charge = stripeService.charge(chargeRequest);
+	  Charge charge = stripeService.charge(chargeRequest, token);
 	  
 	  // Mark reservation as paid
 	  reservation.setIsPaid(true);

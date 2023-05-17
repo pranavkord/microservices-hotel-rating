@@ -13,4 +13,10 @@ public class ChargeRequest {
   private Currency currency;
   private String stripeEmail;
   private String stripeToken;
+  
+  
+  private String cardNumber;
+  private String expMonth;
+  private String expYear;
+  private String cvc;
 }
