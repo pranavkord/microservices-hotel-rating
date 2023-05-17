@@ -1,18 +1,16 @@
 package com.psldemo.hotel.controllers;
 
-
-
-
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.psldemo.hotel.entites.Reservation;
 import com.psldemo.hotel.services.ReservationService;
+import com.stripe.exception.StripeException;
+import com.psldemo.hotel.entites.ChargeRequest;
 
 import javax.validation.Valid;
 import javax.ws.rs.Produces;
@@ -79,5 +77,10 @@ public class ReservationController {
 	public ResponseEntity<Object> getAllReservationsByUserId(@PathVariable String id){
 		List<Reservation> user = reservationService.getReservationsByUserId(id);
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
+	}
+	
+	@PostMapping("/{id}/payment")
+	public void payForReservation(@PathVariable Long id, @RequestBody ChargeRequest chargeRequest) throws StripeException {
+	  reservationService.payForReservation(id, chargeRequest);
 	}
 }

@@ -43,5 +43,9 @@ okta:
   oauth2:
     issuer: https://dev-88604293.okta.com/oauth2/default
     audience: api://default
+    
+stripe:
+  public_key: pk_test_51Jax0wSAvjvCLKQubBCcjuGHmrElPBH6lrZTz7rMOeLHte7jmH9UjKAApNgZkUjE6o0fCNKWdljpgreaCDbNRo1T00ZcNclfS9
+  secret_key: sk_test_51Jax0wSAvjvCLKQuLuJhmeOoqIRhFwGFtB6AuzWsSaqd7F72o4tZqaFIKCnV4bSOCVGMcGb9LqkvfV0faMgGGM6700MQRaxSgc
 
 

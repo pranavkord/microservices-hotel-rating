@@ -1,22 +1,21 @@
 package com.psldemo.hotel.services;
 
-
-import lombok.AllArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.psldemo.hotel.entites.ChargeRequest;
 import com.psldemo.hotel.entites.Reservation;
 import com.psldemo.hotel.exceptions.BadRequestException;
 import com.psldemo.hotel.exceptions.ResourceNotFoundException;
 import com.psldemo.hotel.respositories.ReservationRepository;
-
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class ReservationService {
+  
+    @Autowired
+    StripeService stripeService;
 
     @Autowired	
     private ReservationRepository reservationRepository;
@@ -70,5 +69,19 @@ public class ReservationService {
 		List<Reservation> list = reservationRepository.getReservationsByUserId(id);
 		// TODO Auto-generated method stub
 		return list;
+	}
+	
+	
+	
+	public void payForReservation(Long id, ChargeRequest chargeRequest) throws StripeException {
+	  Reservation reservation = reservationRepository.findById(id).orElseThrow(
+	      () -> new ResourceNotFoundException("reservation does not exist"));
+	  
+	  // Make payment
+	  Charge charge = stripeService.charge(chargeRequest);
+	  
+	  // Mark reservation as paid
+	  reservation.setIsPaid(true);
+	  reservationRepository.save(reservation);
 	}
 }
