@@ -1,20 +1,9 @@
 package com.psldemo.hotel.services;
 
-
-import lombok.AllArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.psldemo.hotel.entites.Reservation;
-import com.psldemo.hotel.exceptions.BadRequestException;
-import com.psldemo.hotel.exceptions.ResourceNotFoundException;
-import com.psldemo.hotel.respositories.ReservationRepository;
-
+import com.psldemo.hotel.payload.CreateReservationRequest;
+import com.stripe.exception.StripeException;
 import java.util.List;
-import java.util.Optional;
-
-
 
 public interface ReservationService {
 
@@ -26,11 +15,13 @@ public interface ReservationService {
 	
 	public List<Reservation> findAllById(Long id);
 	
-	public void createReservation(Reservation reservation);
+	public void createReservation(CreateReservationRequest createReservationRequest);
 	
 	public void updateReservation(Reservation reservation);
 	
 	public void deleteReservation(Long id);
 	
 	public List<Reservation> getReservationsByUserId(String id);
+
+	public void payForReservation(CreateReservationRequest createReservationRequest) throws StripeException;
 }

@@ -1,17 +1,14 @@
 package com.psldemo.hotel.controllers;
 
-
-
-
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.psldemo.hotel.entites.Reservation;
+import com.psldemo.hotel.payload.CreateReservationRequest;
 import com.psldemo.hotel.services.ReservationService;
 
 import javax.validation.Valid;
@@ -50,11 +47,12 @@ public class ReservationController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Map<String, Boolean>> createReservation(@Valid @RequestBody Reservation reservation) {
-        reservationService.createReservation(reservation);
+    public ResponseEntity<Map<String, Boolean>> createReservation(@Valid @RequestBody CreateReservationRequest createReservationRequest) {
+        reservationService.createReservation(createReservationRequest);
         Map<String, Boolean> map = new HashMap<>();
         map.put("success", true);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
+        
     }
 
     @PutMapping("/{id}")
