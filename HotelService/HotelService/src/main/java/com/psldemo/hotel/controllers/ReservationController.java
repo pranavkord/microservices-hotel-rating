@@ -8,9 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.psldemo.hotel.entites.Reservation;
+import com.psldemo.hotel.payload.CreateReservationRequest;
 import com.psldemo.hotel.services.ReservationService;
-import com.stripe.exception.StripeException;
-import com.psldemo.hotel.entites.ChargeRequest;
 
 import javax.validation.Valid;
 import javax.ws.rs.Produces;
@@ -48,11 +47,12 @@ public class ReservationController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Map<String, Boolean>> createReservation(@Valid @RequestBody Reservation reservation) {
-        reservationService.createReservation(reservation);
+    public ResponseEntity<Map<String, Boolean>> createReservation(@Valid @RequestBody CreateReservationRequest createReservationRequest) {
+        reservationService.createReservation(createReservationRequest);
         Map<String, Boolean> map = new HashMap<>();
         map.put("success", true);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
+        
     }
 
     @PutMapping("/{id}")
@@ -77,13 +77,5 @@ public class ReservationController {
 	public ResponseEntity<Object> getAllReservationsByUserId(@PathVariable String id){
 		List<Reservation> user = reservationService.getReservationsByUserId(id);
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
-	}
-	
-	@PostMapping("/{id}/payment")
-	public ResponseEntity<Object> payForReservation(@PathVariable Long id, @RequestBody ChargeRequest chargeRequest) throws StripeException {
-	  reservationService.payForReservation(id, chargeRequest);
-	  Map<String, Boolean> map = new HashMap<>();
-      map.put("success", true);
-      return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 }

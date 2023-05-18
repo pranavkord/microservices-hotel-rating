@@ -1,7 +1,7 @@
 package com.psldemo.hotel.services;
 
-import com.psldemo.hotel.entites.ChargeRequest;
 import com.psldemo.hotel.entites.Reservation;
+import com.psldemo.hotel.payload.CreateReservationRequest;
 import com.stripe.exception.StripeException;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface ReservationService {
 	
 	public List<Reservation> findAllById(Long id);
 	
-	public void createReservation(Reservation reservation);
+	public void createReservation(CreateReservationRequest createReservationRequest);
 	
 	public void updateReservation(Reservation reservation);
 	
@@ -23,5 +23,5 @@ public interface ReservationService {
 	
 	public List<Reservation> getReservationsByUserId(String id);
 
-	public void payForReservation(Long id, ChargeRequest chargeRequest) throws StripeException;
+	public void payForReservation(CreateReservationRequest createReservationRequest) throws StripeException;
 }
